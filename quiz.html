@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz: IA na Educação</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz: O Impacto da IA na Educação</h1>
+
+  <div id="quiz"></div>
+  <button onclick="verificarRespostas()">Enviar Respostas</button>
+  <div id="resultado" class="result"></div>
+
+  <script>
+    const perguntas = [
+      {
+        texto: "1. Como a IA pode ajudar os professores em sala de aula?",
+        opcoes: [
+          "A) Substituindo completamente os professores",
+          "B) Corrigindo provas automaticamente e personalizando o ensino",
+          "C) Dando aulas de educação física",
+          "D) Criando novas matérias aleatórias"
+        ],
+        correta: 1
+      },
+      {
+        texto: "2. Qual destas é uma vantagem da IA na aprendizagem dos alunos?",
+        opcoes: [
+          "A) Deixar o aluno mais preguiçoso",
+          "B) Impedir o acesso a livros físicos",
+          "C) Adaptar o conteúdo ao ritmo de cada estudante",
+          "D) Eliminar a necessidade de estudar"
+        ],
+        correta: 2
+      },
+      {
+        texto: "3. Um risco do uso excessivo da IA na educação é:",
+        opcoes: [
+          "A) Aprender mais rápido",
+          "B) Redução do pensamento crítico e criatividade",
+          "C) Ter mais tempo para aprender",
+          "D) Aumento da leitura de livros"
+        ],
+        correta: 1
+      },
+      {
+        texto: "4. Qual destas tecnologias de IA é mais usada em plataformas educacionais?",
+        opcoes: [
+          "A) Impressora 3D",
+          "B) Carro autônomo",
+          "C) Chatbots e tutores virtuais",
+          "D) GPS"
+        ],
+        correta: 2
+      },
+      {
+        texto: "5. O uso ético da IA na educação envolve:",
+        opcoes: [
+          "A) Espionar os alunos durante a aula",
+          "B) Compartilhar dados dos alunos sem permissão",
+          "C) Proteger a privacidade e usar os dados com responsabilidade",
+          "D) Deixar a IA fazer as provas pelo aluno"
+        ],
+        correta: 2
+      }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    perguntas.forEach((pergunta, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p>${pergunta.texto}</p>`;
+      pergunta.opcoes.forEach((opcao, i) => {
+        div.innerHTML += `
+          <label>
+            <input type="radio" name="pergunta${index}" value="${i}"> ${opcao}
+          </label><br>`;
+      });
+      quizContainer.appendChild(div);
+    });
+
+    function verificarRespostas() {
+      let acertos = 0;
+      perguntas.forEach((pergunta, index) => {
+        const resposta = document.querySelector(`input[name='pergunta${index}']:checked`);
+        if (resposta && parseInt(resposta.value) === pergunta.correta) {
+          acertos++;
+        }
+      });
+      document.getElementById("resultado").innerText = `Você acertou ${acertos} de ${perguntas.length} perguntas.`;
+    }
+  </script>
+</body>
+</html>
