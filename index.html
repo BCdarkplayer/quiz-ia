@@ -34,6 +34,15 @@
       font-weight: bold;
       margin-top: 10px;
     }
+    .animation {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .animation img {
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -42,6 +51,7 @@
   <div id="quiz"></div>
   <button onclick="verificarRespostas()">Enviar Respostas</button>
   <div id="resultado" class="result"></div>
+  <div id="animacao" class="animation"></div>
 
   <script>
     const perguntas = [
@@ -120,8 +130,24 @@
           acertos++;
         }
       });
-      document.getElementById("resultado").innerText = `Você acertou ${acertos} de ${perguntas.length} perguntas.`;
+
+      const total = perguntas.length;
+      const porcentagem = (acertos / total) * 100;
+
+      document.getElementById("resultado").innerText = `Você acertou ${acertos} de ${total} perguntas.`;
+
+      const animacao = document.getElementById("animacao");
+      animacao.innerHTML = "";
+
+      if (porcentagem >= 88) {
+        animacao.innerHTML = `<p>Parabéns! 🎉</p>
+        <img src="https://media.giphy.com/media/l0MYKDrXQEkp2X0rm/giphy.gif" alt="Alunos Celebrando">`;
+      } else {
+        animacao.innerHTML = `<p>Ops... tente de novo! 🤔</p>
+        <img src="https://media.giphy.com/media/l0MYC0LajbaPoEADu/giphy.gif" alt="Alunos Confusos">`;
+      }
     }
   </script>
 </body>
 </html>
+
